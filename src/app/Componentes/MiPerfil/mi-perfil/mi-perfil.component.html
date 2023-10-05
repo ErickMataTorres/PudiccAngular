@@ -1,0 +1,69 @@
+
+
+<div class="container">
+
+    <div style="margin-top:2%;">
+
+        <h1>Mon profil</h1>
+
+        <div class="alert alert-success" role="alert" style="width:50%;" *ngIf="mostrarAlertC">
+            {{respuestaC}}
+          </div>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Id</mat-label>
+            <input matInput placeholder="..." readonly="true" [value]="usuario.Id">
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Nom</mat-label>
+            <input matInput placeholder="..." readonly="true" [value]="usuario.Nombre">
+        </mat-form-field>
+
+        <br>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Utilisateur</mat-label>
+            <input matInput placeholder="..." readonly="true" [value]="usuario.User">
+        </mat-form-field>
+
+        <br>
+
+        <button mat-raised-button color="primary" (click)="cambiarContrasena=!cambiarContrasena">Changer le mot de passe</button>
+
+    </div>
+
+<br>
+    <!-- <div [ngStyle]="{'display':cambiarContrasena===true?'block':'none'}"> -->
+        <div *ngIf="cambiarContrasena">
+            <hr style="width:50%;">
+            <br>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Ancien mot de passe</mat-label>
+            <input matInput placeholder="..." type="password" #txtAntiguaC>
+        </mat-form-field>
+        
+        <br>
+        <hr style="width:50%;">
+        <br>
+        
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Nouveau mot de passe</mat-label>
+            <input matInput placeholder="..." type="password" #txtNuevaC>
+        </mat-form-field>
+        
+        <br>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Confirmer le nouveau mot de passe</mat-label>
+            <input matInput placeholder="..." type="password" #txtConfirmarC>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button color="primary" (click)="CambiarContrasena(txtAntiguaC.value, txtNuevaC.value, txtConfirmarC.value);">Sauvegarder</button>
+
+    </div>
+
+
+</div>

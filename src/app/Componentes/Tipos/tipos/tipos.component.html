@@ -1,0 +1,150 @@
+<div class="container">
+  <h1>Types</h1>
+
+  <mat-form-field appearance="standard" style="width:50%;">
+    <mat-label>Filtre</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="..." #input>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" style="margin-left:1%;"
+    (click)="openModalNuevo(templateNuevo);">Nouvelle</button>
+
+
+  <div [style]="mostrarAlertGuardar" class="alert alert-success" role="alert">
+    {{respuesta}}
+  </div>
+
+  <div [style]="mostrarAlertModificar" class="alert alert-warning" role="alert">
+    {{respuesta}}
+  </div>
+
+  <div [style]="mostrarAlertBorrar" class="alert alert-danger" role="alert">
+    {{respuesta}}
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table matSort [dataSource]="dataSource">
+
+      <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Nombre">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nom </th>
+        <td mat-cell *matCellDef="let element"> {{element.Nombre}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Accion">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element"> <button mat-raised-button color="accent"
+            (click)="openModalModificar(templateModificar, element.Id, element.Nombre);">Modifier</button> <button
+            style="margin-left:1%;" mat-raised-button color="warn"
+            (click)="openModalBorrar(templateBorrar, element.Id, element.Nombre);">Effacer</button></td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">N'a pas rencontré "{{input.value}}"</td>
+      </tr>
+
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+
+</div>
+
+<!--Modal para Guardar-->
+<ng-template #templateNuevo>
+  <div class="modal-header">
+    <h2 class="modal-title">Nouveau type</h2>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      (click)="modalRefNuevo.hide();"></button>
+  </div>
+  <div class="modal-body">
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Id</mat-label>
+      <input matInput placeholder="..." #txtIdNuevo readonly="true" value="Nouvelle">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Nom</mat-label>
+      <input matInput placeholder="..." #txtNombreNuevo>
+    </mat-form-field>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+      (click)="modalRefNuevo.hide();">Fermer</button>
+    <button type="button" class="btn btn-primary" (click)="Guardar('0', txtNombreNuevo.value);">Sauvegarder</button>
+  </div>
+</ng-template>
+<!---->
+
+<!--Modal para modificar-->
+<ng-template #templateModificar>
+  <div class="modal-header">
+    <h2 class="modal-title">Modifier type</h2>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      (click)="modalRefModificar.hide();"></button>
+  </div>
+  <div class="modal-body">
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Id</mat-label>
+      <input matInput placeholder="..." #txtIdModificar readonly="true" value="{{idModificar}}">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Nom</mat-label>
+      <input matInput placeholder="..." #txtNombreModificar value="{{nombreModificar}}">
+    </mat-form-field>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+      (click)="modalRefModificar.hide();">Fermer</button>
+    <button type="button" class="btn btn-primary"
+      (click)="Guardar(txtIdModificar.value, txtNombreModificar.value);">Sauvegarder</button>
+  </div>
+</ng-template>
+<!---->
+
+<!--Modal para borrar-->
+<ng-template #templateBorrar>
+  <div class="modal-header">
+    <h2 class="modal-title">Supprimer le type</h2>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      (click)="modalRefBorrar.hide();"></button>
+  </div>
+  <div class="modal-body">
+    <h4>Voulez-vous vraiment le supprimer?</h4>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Id</mat-label>
+      <input matInput placeholder="..." #txtIdBorrar readonly="true" value="{{idBorrar}}">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Nom</mat-label>
+      <input matInput placeholder="..." #txtNombreBorrar readonly="true" value="{{nombreBorrar}}">
+    </mat-form-field>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+      (click)="modalRefBorrar.hide();">Fermer</button>
+    <button type="button" class="btn btn-primary" (click)="Borrar(txtIdBorrar.value);">Effacer</button>
+  </div>
+</ng-template>
+<!---->

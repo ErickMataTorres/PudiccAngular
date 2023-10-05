@@ -1,0 +1,274 @@
+<h1 style="text-align: center;">Projets</h1>
+
+<!-- <div class="container" *ngFor="let imagen of imagenes;">
+  <img style="height:20%; width:20%;"src="https://localhost:44357{{imagen}}">
+</div> -->
+
+
+<div class="container">
+
+  <mat-form-field appearance="fill" style="width:50%;">
+    <mat-label>Sélectionnez un type</mat-label>
+    <mat-select (selectionChange)="CardsPublicacion(cbTipos.value);" [(ngModel)]="selectedSelect" #cbTipos>
+      <mat-option *ngFor="let tipo of tipos" [value]="tipo.Id">
+        {{tipo.Nombre}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button id="bNPublicacion" [ngStyle]="{'display' : mostrar === true ? 'block inline' : 'none'}" mat-raised-button color="primary" (click)="openModalNuevo(templateNuevo);">Nouveau poste</button>
+
+
+    <div [style]="mostrarAlertGuardar" class="alert alert-success" role="alert">
+      A été enregistré avec succès
+    </div>
+    
+    
+      <div [style]="mostrarAlertModificar" class="alert alert-warning" role="alert">
+        A été mis à jour avec succès
+      </div>
+    
+      <div [style]="mostrarAlertBorrar" class="alert alert-danger" role="alert">
+        A été supprimé avec succès
+      </div>
+
+
+  <!-- <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let proyecto of proyectos;">
+      <div class="card">
+        <img src="https://localhost:44357{{proyecto.Imagen[0]}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{ proyecto.Titulo }}</h5>
+          <p class="card-text">{{proyecto.Descripcion}}</p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+  <!-- <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let proyecto of proyectos">
+      <div class="card h-100">
+        <img src="https://localhost:44357{{proyecto.Imagen[0]}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{proyecto.Titulo}}</h5>
+          <p class="card-text">{{proyecto.Descripcion}}</p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let proyecto of proyectos;">
+      <div class="card h-100">
+        <img src="{{url+proyecto.Imagen[0]}}" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h2 class="card-title">{{proyecto.Titulo}}</h2>
+          <p class="card-text">{{proyecto.Descripcion}}</p>
+        </div>
+        <div class="card-footer text-center">
+          <small class="text-muted">
+            <button color="primary" mat-raised-button (click)="AbrirModalDetalles(proyecto.Id, proyecto.Titulo, proyecto.Descripcion, proyecto.Imagen, proyecto.IdTipo, proyecto.NombreTipo);">Voir les détails</button>
+            <button [ngStyle]="{'display' : mostrar === true ? 'block inline' : 'none'}" id="bModificar" mat-raised-button color="accent" (click)="openModalModificar(templateModificar,proyecto.Id, proyecto.Titulo, proyecto.Descripcion, proyecto.Imagen, proyecto.IdTipo, proyecto.NombreTipo);">Modifier</button>
+            <button [ngStyle]="{'display' : mostrar === true ? 'block inline' : 'none'}" id="bBorrar" mat-raised-button color="warn" (click)="AbrirModalBorrar(proyecto.Id, proyecto.Titulo, proyecto.IdTipo);">Effacer</button></small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!--Modal para Guardar-->
+<ng-template #templateNuevo>
+  <div class="modal-header">
+    <h2 class="modal-title">Nouveau poste</h2>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      (click)="modalRefNuevo.hide();"></button>
+  </div>
+  <div class="modal-body">
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Id</mat-label>
+      <input matInput placeholder="..." #txtIdNuevo readonly="true" value="Nouvelle">
+    </mat-form-field>
+
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Qualification</mat-label>
+      <input matInput placeholder="..." #txtTituloNuevo>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Description</mat-label>
+      <input matInput placeholder="..." #txtDescripcionNuevo>
+    </mat-form-field>
+
+
+      <input class="form-control" type="file" multiple (change)="onFileSelected($event);" #txtImagenesNuevo>
+  
+<br>
+    <mat-form-field appearance="fill">
+      <mat-label>Sélectionnez un type</mat-label>
+      <select matNativeControl required #cbTiposNuevo>
+        <option hidden></option>
+        <option *ngFor="let tipoNuevo of tiposNuevos" [value]="tipoNuevo.Id">{{ tipoNuevo.Nombre }}</option>
+      </select>
+    </mat-form-field>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+      (click)="modalRefNuevo.hide();">Fermer</button>
+    <button type="button" class="btn btn-primary" (click)="Guardar('0',txtTituloNuevo.value, txtDescripcionNuevo.value, cbTiposNuevo.value);">Sauvegarder</button>
+  </div>
+</ng-template>
+
+<!---->
+
+<!--Modal para Ver Detalles-->
+
+<div class="modal fade" tabindex="-1" id="modalDetalles">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">{{datosDetalles.Titulo}}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>{{datosDetalles.Descripcion}}</p>
+        <div id="carouselExampleIndicators" class="carousel slide w-100" data-bs-ride="carousel" style="height:550px;">
+
+          <div class="carousel-indicators">
+      
+      
+      
+            <button [ngClass]="{'active': i === 0}" *ngFor="let imagen of datosDetalles.Imagen; let i=index;" type="button" data-bs-target="#carouselExampleIndicators"
+            attr.data-bs-slide-to="{{i}}" [attr.aria-current]="i===0 ? true : false" attr.aria-label="Slide {{i}}"></button>
+      
+            <!-- <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+              attr.aria-label="Slide 2"></button> -->
+      
+      
+          </div>
+      
+          <div class="carousel-inner">
+      
+            
+      
+              <div [ngClass]="(i===0)?'carousel-item active':'carousel-item'" *ngFor="let imagen of datosDetalles.Imagen; let i=index;">
+                <img src="{{url+imagen}}" class="d-block w-100" style="height:550px;" alt="...">
+      
+              </div>
+      <!-- 
+              <div class="carousel-item">
+                <img src="https://localhost:44357{{imagen}}" class="d-block w-100" alt="...">
+      
+              </div> -->
+      
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Précédent</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Prochain</span>
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!---->
+
+
+<!-- Modal para Modificar -->
+
+  <ng-template #templateModificar>
+  <div class="modal-header">
+    <h2 class="modal-title">Modifier la publication</h2>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+      (click)="modalRefModificar.hide();"></button>
+  </div>
+  <div class="modal-body">
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Id</mat-label>
+      <input matInput placeholder="..." #txtIdModificar readonly="true" value="{{datosModificar.Id}}">
+    </mat-form-field>
+
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Qualification</mat-label>
+      <input matInput placeholder="..." #txtTituloModificar value="{{datosModificar.Titulo}}">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Description</mat-label>
+      <input matInput placeholder="..." #txtDescripcionModificar value="{{datosModificar.Descripcion}}">
+    </mat-form-field>
+
+
+      <input class="form-control" type="file" multiple (change)="onFileSelected($event);" #txtImagenesModificar>
+  
+<br>
+    <mat-form-field appearance="fill">
+      <mat-label>Sélectionnez un type</mat-label>
+      <select matNativeControl required #cbTiposModificar [(ngModel)]="datosModificar.IdTipo">
+        <option hidden></option>
+        <option *ngFor="let tipoNuevo of tiposNuevos" [value]="tipoNuevo.Id">{{ tipoNuevo.Nombre }}</option>
+      </select>
+    </mat-form-field>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+      (click)="modalRefModificar.hide();">Fermer</button>
+    <button type="button" class="btn btn-primary" (click)="Guardar(txtIdModificar.value,txtTituloModificar.value, txtDescripcionModificar.value, cbTiposModificar.value);">Sauvegarder</button>
+  </div>
+</ng-template>
+
+
+ <!-- --> 
+
+
+ <!-- Modal para confirmar el borrar -->
+
+ <div class="modal fade" tabindex="-1" id="modalBorrar">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title">Supprimer publication</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Souhaitez-vous vraiment supprimer le publication?</p>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Id</mat-label>
+          <input matInput placeholder="..." #txtIdBorrar value="{{datosBorrar.Id}}" readonly="true">
+        </mat-form-field>    
+        
+        <mat-form-field class="example-full-width" appearance="fill">  
+        <mat-label>Qualification</mat-label>
+          <input matInput placeholder="..." #txtTituloBorrar value="{{datosBorrar.Titulo}}" readonly="true">
+        </mat-form-field>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+        <button type="button" class="btn btn-primary" (click)="EjecutarBorrar(txtIdBorrar.value, datosBorrar.IdTipo);">Effacer</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+ <!--  -->

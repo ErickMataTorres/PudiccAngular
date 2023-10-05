@@ -1,0 +1,299 @@
+<div id="myModal" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <h1>{{respuestaRegistro}}</h1>
+        <img src="{{this.url}}/Imagenes/icons8-de-acuerdo-480.png" style="height:40%; width:40%;">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center; margin-top: 10%; color:green;" class="h1">Formulaire d’adhésion</div>
+
+<div style="text-align: center; font-family:arial; font-size: x-large; margin-top:2%;">
+  <b>Commune: Cornillon Grand-Bois</b>
+  <b style="margin-left:8%;">Localité: </b>
+  <mat-form-field class="example-full-width" appearance="fill" style="width:30%;">
+    <mat-label>Localité <label style="color:red;" class="opcional">*</label></mat-label>
+    <input matInput placeholder="..." #txtLocalite>
+  </mat-form-field>
+</div>
+
+<div style="text-align: center; font-family:arial; font-size: x-large; margin-top:2%;">
+  <b>Informations sur l’adhérant(es)</b>
+</div>
+<div class="container" style="border: solid black 2px; margin-top:2%;">
+  <br>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>No. Dossier:</mat-label>
+    <input matInput placeholder="..." value="PUD........................................." #txtNoDossier
+      readonly="true">
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field class="example-full-width" appearance="fill" style="width:48%;">
+    <mat-label>Nom: <label style="color:red;" class="opcional">*</label></mat-label>
+    <input matInput placeholder="..." #txtNom>
+  </mat-form-field>
+
+
+  <mat-form-field class="example-full-width" appearance="fill" style="width:48%; margin-left:2%;">
+    <mat-label>Prénom: <label style="color:red;" class="opcional">*</label></mat-label>
+    <input matInput placeholder="..." #txtPrenom>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" style="width:48%;">
+    <mat-label>Profession: <label style="color:red;" class="opcional">*</label></mat-label>
+    <input matInput placeholder="..." #txtProfession>
+  </mat-form-field>
+
+
+  <mat-form-field class="example-full-width" appearance="fill" style="width:48%; margin-left:2%;">
+    <mat-label>NIF/CIN: <label style="color:red;" class="opcional">*</label></mat-label>
+    <input matInput placeholder="..." #txtNifCin>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" style="width:48%;">
+    <mat-label>Nom de la mère: <label style="color:red;" class="opcional">*</label></mat-label>
+    <input matInput placeholder="..." #txtNomMere>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" style="width:48%; margin-left:2%;">
+    <mat-label>Prenom de la mère: <label style="color:red;" class="opcional">*</label></mat-label>
+    <input matInput placeholder="..." #txtPrenomMere>
+  </mat-form-field>
+
+  <br>
+
+  <mat-form-field class="example-full-width" appearance="fill" style="width:48%;">
+    <mat-label>Nom du père: <label style="color:red;" class="opcional">*</label></mat-label>
+    <input matInput placeholder="..." #txtNomPere>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" style="width:48%; margin-left:2%;">
+    <mat-label>Prenom du père: <label style="color:red;" class="opcional">*</label></mat-label>
+    <input matInput placeholder="..." #txtPrenomPere>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" style="width:48%;">
+    <mat-label>Date de Naissance: (Jj-mm-aaaa) <label style="color:red;" class="opcional">*</label></mat-label>
+    <input matInput [matDatepicker]="picker" #txtDateNaissance readonly="true">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker startView="year" [startAt]="startDate"></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" style="width:48%; margin-left:2%;">
+    <mat-label>Lieu de Naissance: <label style="color:red;" class="opcional">*</label></mat-label>
+    <input matInput placeholder="..." #txtLieuNaissance>
+  </mat-form-field>
+
+  <div>
+    <label id="example-radio-group-label">État civil: <label style="color:red;" class="opcional">*</label></label>
+    <br>
+    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+      [(ngModel)]="estadoSeleccionado">
+      <mat-radio-button style="margin-left:2%;" class="example-radio-button" *ngFor="let estado of estadoCivil"
+        [value]="estado">
+        {{estado}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <div>
+    <label id="example-radio-group-label">Sexe: <label style="color:red;" class="opcional">*</label></label>
+    <br>
+    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+      [(ngModel)]="sexoSeleccionado">
+      <mat-radio-button style="margin-left:2%;" class="example-radio-button" *ngFor="let s of sexo" [value]="s">
+        {{s}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+
+  <br>
+
+  <!-- <mat-form-field class="example-full-width" appearance="fill" style="width:48%;">
+    <mat-label>Autres: <label style="color:red;" class="opcional">(Optionnel)</label></mat-label>
+    <input matInput placeholder="..." #txtAutres>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" style="width:48%; margin-left:2%;">
+    <mat-label>Tel: <label style="color:red;" class="opcional">(Optionnel)</label></mat-label>
+     <span matPrefix>+1 &nbsp;</span> 
+    <input type="tel" matInput placeholder="..." #txtTel>
+    <mat-icon matSuffix>mode_edit</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" style="width:48%;">
+    <mat-label>Personne à contacter en cas d’urgence: <label style="color:red;" class="opcional">(Optionnel)</label>
+    </mat-label>
+    <input matInput placeholder="..." #txtContacterUrgence>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" style="width:48%; margin-left:2%;">
+    <mat-label>Tel: <label style="color:red;" class="opcional">(Optionnel)</label></mat-label>
+     <span matPrefix>+1 &nbsp;</span> 
+    <input type="tel" matInput placeholder="..." #txtTelContacterUrgence>
+    <mat-icon matSuffix>mode_edit</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width" appearance="fill" style="width:98%;">
+    <mat-label>Lien avec la personne: <label style="color:red;" class="opcional">(Optionnel)</label></mat-label>
+    <input matInput placeholder="..." #txtLienAvecPersonne>
+  </mat-form-field> -->
+
+
+</div>
+
+<div class="container">
+  <div style="text-align: center; font-family:arial; font-size: x-large; margin-top:2%;">
+    <b>Condition d’admission et consentement</b>
+  </div>
+
+  <div style="font-family:arial; font-size:large; font-weight: bold;">
+
+    <!-- <p>1.- Une carte d’identité, # Nif ou CIN. <label style="color:red;" class="opcional"><b>*</b></label></p>
+    <input type="file" class="form-control" style="width:50%;" #txtCarteIdentiteNifCinUrl
+      (change)="selectedCarte($event);"> -->
+
+      <p>1.- Une carte d’identité, # Nif ou CIN.</p>
+      <!-- <input type="file" class="form-control" style="width:50%;" #txtCarteIdentiteNifCinUrl
+        (change)="selectedCarte($event);"> -->
+
+    <p>2.- Un numéro de cellulaire à titre personnel.</p>
+    <mat-form-field class="example-full-width" appearance="fill" style="width:30%;">
+      <mat-label>Tel: <label style="color:red;" class="opcional">*</label></mat-label>
+      <!-- <span matPrefix>+1 &nbsp;</span> -->
+      <input type="tel" matInput placeholder="..." #txtCellulairePersonnel>
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+
+
+
+    <!-- <p>3.- Deux photos (2x2). <label style="color:red;" class="opcional"><b>*</b></label></p>
+    <input type="file" class="form-control" style="width:50%;" multiple #txtPhotosUrl
+      (change)="selectedPhotos($event);"> -->
+
+      <p>3.- Deux photos (2x2).</p>
+      <!-- <input type="file" class="form-control" style="width:50%;" multiple #txtPhotosUrl
+        (change)="selectedPhotos($event);"> -->
+
+
+    <p>4.- Payer un frais de 100 gourdes.</p>
+
+    <p>5.- Payer une cotisation mensuelle de 100 gourdes.</p>
+
+    <p>6.- Ne pas avoir été condamné, ou être en état de condamnation à purger une peine afflictive
+      ou infamante ou être en liberté conditionnelle.</p>
+
+    <p>7.- Ne pas avoir été membre d’un groupe de rebelle, terroriste, guérilla, ou toute autre groupe
+      ne répondant pas aux lois, normes, conventions, nationales et internationales.</p>
+
+    <!-- <p>8.- Des pièces justificatives tel que casier judicaires, documents de voyages, et autres,
+      pourraient être demandées en cas de doute pour prouver l’innocence de ce dernier. <label style="color:red;"
+        class="opcional">(Optionnel)</label></p>
+    <input type="file" class="form-control" style="width:50%;" multiple #txtCasierJudicairesUrl
+      (change)="selectedCasierJudicaires($event);"> -->
+
+      <p>8.- Des pièces justificatives tel que casier judicaires, documents de voyages, et autres,
+        pourraient être demandées en cas de doute pour prouver l’innocence de ce dernier.</p>
+
+
+  </div>
+
+  <mat-checkbox (change)="habilitarRegistrar=!habilitarRegistrar" class="example-margin"
+    style="font-family:arial; font-size:large; margin-top:2%;">Je consens que les renseignements fournis dans ce
+    formulaire soient véridiques et je
+    m’engage à respecter les règlements internes de ladite plateforme PUDICCGB.</mat-checkbox>
+
+  <div style="text-align:center; margin-top:2%;">
+    <button [disabled]="habilitarRegistrar" mat-raised-button color="primary"
+      style="font-size:large; font-family:arial;"
+      (click)="Registrar(0,txtLocalite.value, txtNoDossier.value,txtNom.value,txtPrenom.value,txtProfession.value,txtNifCin.value,txtNomMere.value,txtPrenomMere.value,txtNomPere.value,txtPrenomPere.value,txtDateNaissance.value,txtLieuNaissance.value,estadoSeleccionado, sexoSeleccionado,txtCellulairePersonnel.value);">S'inscrire</button>
+      <!-- <button [disabled]="habilitarRegistrar" mat-raised-button color="primary"
+      style="font-size:large; font-family:arial;"
+      (click)="Registrar(0,txtLocalite.value, txtNoDossier.value,txtNom.value,txtPrenom.value,txtProfession.value,txtNifCin.value,txtNomMere.value,txtPrenomMere.value,txtNomPere.value,txtPrenomPere.value,txtDateNaissance.value,txtLieuNaissance.value,estadoSeleccionado, sexoSeleccionado,txtAutres.value,txtTel.value,txtContacterUrgence.value,txtTelContacterUrgence.value,txtLienAvecPersonne.value,txtCellulairePersonnel.value);">S'inscrire</button> -->
+  </div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade" tabindex="-1" id="modalCampos">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <h1>Remplissez tous les champs obligatoires, s'il vous plaît</h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="modal fade" tabindex="-1" id="modalTamaño">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <h1><b style="color:red;">Point {{puntoNumero}}: </b>{{respuestaTamano}}</h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" tabindex="-1" id="modalTamanoTodos">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+
+        <div *ngIf='boolCarte===false;'>
+          <h1><b style="color:red;">Point 1: </b>{{respuestaCarte}}</h1>
+        </div>
+
+        <div *ngIf='boolFotos===false;'>
+          <h1><b style="color:red;">Point 3: </b>{{respuestaPhotos}}</h1>
+        </div>
+
+        <div *ngIf='boolCasier===false;'>
+          <h1><b style="color:red;">Point 8: </b>{{respuestaCasier}}</h1>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+      </div>
+    </div>
+  </div>
+</div>
