@@ -1,30 +1,31 @@
 import {HttpClientModule} from '@angular/common/http';
-
-
+import { FormsModule} from '@angular/forms';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProyectosComponent } from './Componentes/Proyectos/proyectos/proyectos.component';
 
-// import {MatLegacyButtonModule as MatButtonModule} from '@angular/material/legacy-button';
-// import {MatLegacyFormFieldModule as MatFormFieldModule} from '@angular/material/legacy-form-field';
-// import {MatLegacyInputModule as MatInputModule} from '@angular/material/legacy-input';
-// import {MatLegacySelectModule as MatSelectModule} from '@angular/material/legacy-select';
-// import {MatLegacyTableModule as MatTableModule} from '@angular/material/legacy-table';
-// import {MatSortModule} from '@angular/material/sort';
-// import {MatLegacyPaginatorModule as MatPaginatorModule} from '@angular/material/legacy-paginator';
-// import {MatLegacyCardModule as MatCardModule} from '@angular/material/legacy-card';
-// import {MatLegacyDialogModule as MatDialogModule} from '@angular/material/legacy-dialog';
-// import {MatDatepickerModule} from '@angular/material/datepicker';
-// import {MatLegacyRadioModule as MatRadioModule} from '@angular/material/legacy-radio';
+import {MatLegacyButtonModule as MatButtonModule} from '@angular/material/legacy-button';
+import {MatLegacyFormFieldModule as MatFormFieldModule} from '@angular/material/legacy-form-field';
+import {MatLegacyInputModule as MatInputModule} from '@angular/material/legacy-input';
+import {MatLegacySelectModule as MatSelectModule} from '@angular/material/legacy-select';
+import {MatLegacyTableModule as MatTableModule} from '@angular/material/legacy-table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatLegacyPaginatorModule as MatPaginatorModule} from '@angular/material/legacy-paginator';
+import {MatLegacyCardModule as MatCardModule} from '@angular/material/legacy-card';
+import {MatLegacyDialogModule as MatDialogModule} from '@angular/material/legacy-dialog';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatLegacyRadioModule as MatRadioModule} from '@angular/material/legacy-radio';
 import {MatIconModule} from '@angular/material/icon';
-// import {MatLegacyCheckboxModule as MatCheckboxModule} from '@angular/material/legacy-checkbox';
+import {MatLegacyCheckboxModule as MatCheckboxModule} from '@angular/material/legacy-checkbox';
 
 
 
 
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
@@ -36,15 +37,6 @@ import { AcercaComponent } from './Componentes/Acerca/acerca/acerca.component';
 import { ContactoComponent } from './Componentes/Contacto/contacto/contacto.component';
 import { RegistroComponent } from './Componentes/Registro/registro/registro.component';
 import { MatNativeDateModule } from '@angular/material/core';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { MatTableModule } from '@angular/material/table';
-import { MatSortModule } from '@angular/material/sort';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -64,23 +56,23 @@ import { MatDialogModule } from '@angular/material/dialog';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    // FormsModule,
-    // BrowserAnimationsModule,
+    FormsModule,
+    BrowserAnimationsModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatIconModule,
+    MatInputModule,
     MatSelectModule,
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    // MatCardModule,
+    MatCardModule,
     MatDialogModule,
-    // MatDatepickerModule,
+    MatDatepickerModule,
     MatNativeDateModule,
+    MatRadioModule,
     MatIconModule,
-    MatIconModule,
-    // MatCheckboxModule,
-    // ModalModule.forRoot()
+    MatCheckboxModule,
+    ModalModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
